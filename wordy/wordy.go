@@ -60,7 +60,7 @@ op2, _ := strconv.Atoi(operands[1])
    if strings.Contains(input,"plus") {
 
          input = strings.Replace(input,"plus","",1)
-         final_eval = op1 + op2
+         final_eval = op1+op2
 
 
    } else if strings.Contains(input,"minus"){

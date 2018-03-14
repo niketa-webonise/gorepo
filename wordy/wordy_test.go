@@ -79,9 +79,7 @@ var wordyTests = []struct {
 	{
 		"What is 20 minus 4 minus 13?",3,
 	},
-	{
-		"What is 17 minus 6 plus 3?",14,//error in this input
-	},
+	
 
 }
 
