@@ -17,8 +17,7 @@ input:"(223) 456-7890",
 number:"2234567890",
 areaCode:"223",
 formatted: "(223) 456-7890",
-
-		expectErr:   false,
+expectErr:   false,
 },
 {
 
@@ -26,7 +25,7 @@ input:       "223.456.7890",
 number:      "2234567890",
 areaCode:    "223",
 formatted:   "(223) 456-7890",
-		expectErr:   false,
+expectErr:   false,
 },
 {
 
@@ -34,7 +33,7 @@ input:       "223 456 7890",
 number:      "2234567890",
 areaCode:    "223",
 formatted:   "(223) 456-7890",
-		expectErr:   false,
+expectErr:   false,
 },
 
 
@@ -44,7 +43,7 @@ input:       "+1 (223) 456-7890",
 number:      "2234567890",
 areaCode:    "223",
 formatted:   "(223) 456-7890",
-		expectErr:   false,
+expectErr:   false,
 },
 
 {
@@ -52,7 +51,7 @@ input:       "223 456   7890   ",
 number:      "2234567890",
 areaCode:    "223",
 formatted:   "(223) 456-7890",
-		expectErr:   false,
+expectErr:   false,
 },
 	
 	{

@@ -13,9 +13,6 @@ var temp string
 
 func Number(input string) (string, error) {
 
-
-
-
    re_leadclose_whtsp := regexp.MustCompile(`^[\s\p{Zs}]+|[\s\p{Zs}]+$`)
    re_inside_whtsp := regexp.MustCompile(`[\s\p{Zs}]{2,}`)
 
@@ -27,8 +24,6 @@ func Number(input string) (string, error) {
 
    err := validate(final)
 
-
-	
 	if(err == nil) {
 		return (temp+v2+v3), nil
 	} else {
@@ -165,5 +160,6 @@ func validate(input string) (error) {
 
 		return errors.New("contains letters")
 	}
+
 	return nil
 }
