@@ -1,7 +1,8 @@
+
 package main
 
 import("fmt"
-		"./schedular")
+		"github.com/niketa/gorepo/library/schedular")
 
 func f1(){
 

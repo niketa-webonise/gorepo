@@ -1,16 +1,20 @@
 package main
 
+import ("fmt"
+		"log"
+		"net/http")
 
-import ("log"
-		"net/http"
-		"./controllers")
+
+func allBooks(w http.ResponseWriter,r *http.Request){
+	fmt.Fprintf(w,"Get request on books")
+}
 
 
 func handleRequests(){
 
-	http.HandleFunc("/", controllers.HomePage)
-	http.HandleFunc("/books",controllers.AllBooks)
-	log.Fatal(http.ListenAndServe(":8686",nil))
+	http.HandleFunc("/",homePage)
+	http.HandleFunc("/books",allBooks)
+	log.Fatal(http.ListenAndServe(":8084",nil))
 }
 func main() {
 
