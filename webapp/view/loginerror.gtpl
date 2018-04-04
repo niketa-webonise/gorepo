@@ -19,6 +19,8 @@
 
 
   <div class="container">
+
+  
     <label for="uname"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
 

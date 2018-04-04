@@ -14,6 +14,8 @@ type SgnError struct {
 
 	Msg string
 	Password string
+	Firstname string
+	Lastname string
 
 }
 
@@ -65,6 +67,10 @@ func DashboardError(w http.ResponseWriter,r *http.Request){
 		signup_msg.Msg = "please enter correct email"
 
 		signup_msg.Password = "password doesn't match"
+
+		signup_msg.Firstname = "firstname should contains alphabets only"
+
+		signup_msg.Lastname = "lastname should contains alphabets only"
 
 
 		t.ExecuteTemplate(w,"signuperror.gtpl",signup_msg)

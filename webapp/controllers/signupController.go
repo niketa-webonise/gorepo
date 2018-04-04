@@ -21,40 +21,47 @@ func SignUpPage(w http.ResponseWriter,r *http.Request){
         
         
 
-    } else if r.Method == "POST"{
+    } else if r.Method == "POST" {
 
        
         r.ParseForm()
 
-
+        firstname := r.FormValue("firstname")
+        lastname := r.FormValue("lastname")
         email := r.FormValue("email")
         password := r.FormValue("psw")
         repassword := r.FormValue("psw-repeat")
-      
 
-           if m, _ := regexp.MatchString(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`,email);
+         
+
+        var fname = regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
+
+        var lname = regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
         
+        if m, _ := regexp.MatchString(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`,email);
+           
+            !m {
+                http.Redirect(w,r,"/signuperror",301)
+            }else{
 
-           !m {
+                if strings.Compare(password,repassword)!= 0 {
+                http.Redirect(w,r,"/signuperror",301)
 
-            //fmt.Println("no insertion")
+        }else{
 
-            http.Redirect(w,r,"/signuperror",301)
-                }else{
+            if fname(firstname) && lname(lastname){
 
-                        if strings.Compare(password,repassword)!= 0 {
+                model.CreateUsers(email,password,firstname,lastname)
 
-                           
-                            http.Redirect(w,r,"/signuperror",301)
-                        }else{
+                http.Redirect(w,r,"/login",301)
 
-                             
-                            model.CreateUsers(email,password)
+            }else{
 
-                            http.Redirect(w,r,"/login",301)
+                http.Redirect(w,r,"/signuperror",301)
+            }
 
-                        }
+        }
+    }
+
 }
 }
-}
-

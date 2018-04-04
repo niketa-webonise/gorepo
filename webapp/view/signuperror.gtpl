@@ -13,6 +13,14 @@
     <p>Please fill in this form to create an account.</p>
     <hr>
 
+     <label for="firstname"><b>Firstname</b></label>
+    <input type="text" placeholder="Enter Firstname" name="firstname" required>
+    <p style="color:red">{{ .Firstname }}</p>
+
+    <label for="lastname"><b>Lastname</b></label>
+    <input type="text" placeholder="Enter Lastname" name="lastname" required>
+    <p style="color:red">{{ .Lastname }}</p>
+
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email">
     <p style="color:red">{{ .Msg }}</p>

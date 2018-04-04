@@ -14,7 +14,7 @@
 
     <div class="form_div">
     
-    <p class="form_label">LOGIN FORM</p>
+    <center><p class="form_label">LOGIN FORM</p></center>
     
 <form method="post" action="/login">
 

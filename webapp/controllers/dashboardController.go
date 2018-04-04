@@ -6,29 +6,30 @@ import ("net/http"
 		"github.com/niketa/gorepo/webapp/model"
 		)
 
-type User struct{
-	Email string
-}
+
 func DashboardPage(w http.ResponseWriter,r *http.Request){
 
 
 	if r.Method == "GET"{
 
-if model.CurrentUserEmail!=" " {
+		if model.CurrentUserEmail!=" " {
 
-t,_ := template.ParseFiles("./view/dashboard.gtpl")
-
-
-email := model.CurrentUserEmail
-
-usrEID := User{}
-usrEID.Email = email
-
-t.ExecuteTemplate(w,"dashboard.gtpl",usrEID)
+			t,_ := template.ParseFiles("./view/dashboard.gtpl")
 
 
-} else {
-http.Redirect(w,r,"/dashboarderror",301)
-}
-}
+			email := model.CurrentUserEmail
+
+			usrEID := model.GetUserByEmail(email)
+
+			/*usrEID := User{}
+			usrEID.Email = email
+			usrEID.FirstName = */
+
+			t.ExecuteTemplate(w,"dashboard.gtpl",usrEID)
+
+
+		} else {
+			http.Redirect(w,r,"/dashboarderror",301)
+		}
+	}
 }

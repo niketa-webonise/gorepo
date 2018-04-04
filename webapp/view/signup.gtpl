@@ -13,11 +13,17 @@
     <p>Please fill in this form to create an account.</p>
     <hr>
 
+    <label for="firstname"><b>Firstname</b></label>
+    <input type="text" placeholder="Enter Firstname" name="firstname" required>
+
+    <label for="lastname"><b>Lastname</b></label>
+    <input type="text" placeholder="Enter Lastname" name="lastname" required>
+
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email">
+    <input type="text" placeholder="Enter Email" name="email" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw">
+    <input type="password" placeholder="Enter Password" name="psw" required="">
 
     <label for="psw-repeat"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
