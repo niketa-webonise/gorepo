@@ -34,9 +34,9 @@ func SignUpPage(w http.ResponseWriter,r *http.Request){
 
          
 
-        var fname = regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
+        var fname = regexp.MustCompile(`^[a-zA-Z\s]+$`).MatchString
 
-        var lname = regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
+        var lname = regexp.MustCompile(`^[a-zA-Z\s]+$`).MatchString
         
         if m, _ := regexp.MatchString(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`,email);
            
