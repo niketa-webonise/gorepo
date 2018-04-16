@@ -8,6 +8,7 @@ package main
          "strings"
          "math"
          "strconv"
+
          
  )
 
@@ -66,20 +67,34 @@ package main
         var kml Kml
         xml.Unmarshal(XMLdata, &kml)
 
-        polylineCoordinatesStr := kml.Document.Placemark.LineString.Coordinates
+        polylineCoordinatesStr := strings.TrimSpace(kml.Document.Placemark.LineString.Coordinates)
 
-        fmt.Println(polylineCoordinatesStr)
+        polylineCoordinates := strings.Split(polylineCoordinatesStr," ")
+        fmt.Println(polylineCoordinates)
 
-        poly_split := strings.Split(polylineCoordinatesStr,",")
+        point1 := strings.Split(polylineCoordinates[0],",")
+        point2 := strings.Split(polylineCoordinates[1],",")
+        point3 := strings.Split(polylineCoordinates[2],",")
+        
+       // fmt.Println("poly split",poly_split)
 
-        x1 := poly_split[0]
-        y1 := poly_split[1]
+        x1 := point1[0]
+        y1 := point1[1]
 
-        x2 := poly_split[3]
-        y2 := poly_split[4]
+        fmt.Println("x1",x1)
+        fmt.Println("y2",y1)
 
-        x3 := poly_split[6]
-        y3 := poly_split[7]
+        x2 := point2[0]
+        y2 := point2[1]
+
+        fmt.Println("x2",x2)
+        fmt.Println("y2",y2)
+
+        x3 := point3[0]
+        y3 := point3[1]
+
+        fmt.Println("x3",x3)
+        fmt.Println("y3",y3)
 
      
     //convert to float64
@@ -98,16 +113,21 @@ package main
         dist_two := dist2/1000
         dist_three := dist3/1000
 
+        var totaldis float64
+
+        totaldis = dist1 + dist2 + dist3
+
         fmt.Printf("\nDistance between x1,y1 and x2,y2 two polylines coordinates: %.3f"+"km ",dist_one)
         fmt.Printf("\nDistance between x2,y2 and x3,y3 two polylines coordinates: %.3f"+"km ",dist_two)
         fmt.Printf("\nDistance between x1,y1 and x3,y3 two polylines coordinates: %.3f"+"km ",dist_three)
+          fmt.Printf("\nTotal Distance: %.3f"+"km ",totaldis/1000)
 
     }
 
 
     // haversin(θ) function
 func hsin(theta float64) float64 {
-	return math.Pow(math.Sin(theta/2), 2)
+    return math.Pow(math.Sin(theta/2), 2)
 }
 
 // Distance function returns the distance (in meters) between two points of
@@ -120,18 +140,18 @@ func hsin(theta float64) float64 {
 // distance returned is METERS!!!!!!
 // http://en.wikipedia.org/wiki/Haversine_formula
 func Distance(lat1, lon1, lat2, lon2 float64) float64 {
-	// convert to radians
+    // convert to radians
   // must cast radius as float to multiply later
-	var la1, lo1, la2, lo2, r float64
-	la1 = lat1 * math.Pi / 180
-	lo1 = lon1 * math.Pi / 180
-	la2 = lat2 * math.Pi / 180
-	lo2 = lon2 * math.Pi / 180
+    var la1, lo1, la2, lo2, r float64
+    la1 = lat1 * math.Pi / 180
+    lo1 = lon1 * math.Pi / 180
+    la2 = lat2 * math.Pi / 180
+    lo2 = lon2 * math.Pi / 180
 
-	r = 6378100 // Earth radius in METERS
+    r = 6378100 // Earth radius in METERS
 
-	// calculate
-	h := hsin(la2-la1) + math.Cos(la1)*math.Cos(la2)*hsin(lo2-lo1)
+    // calculate
+    h := hsin(la2-la1) + math.Cos(la1)*math.Cos(la2)*hsin(lo2-lo1)
 
-	return 2 * r * math.Asin(math.Sqrt(h))
+    return 2 * r * math.Asin(math.Sqrt(h))
 }

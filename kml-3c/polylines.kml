@@ -6,6 +6,6 @@
 <Placemark>
 <name>Shape</name>
 <description>Shape</description>
-<LineString><coordinates>144.253,-36.6632,0,144.2891,-36.6894,0,144.2344,-36.6907,0</coordinates></LineString><styleUrl>#thickLine</styleUrl></Placemark>
+<LineString><coordinates>75.849609375,22.806567100271522,0 74.64111328125,22.614010874370294,0 75.1904296875,23.82555130688476,0</coordinates></LineString><styleUrl>#thickLine</styleUrl></Placemark>
 </Document>
 </kml>
