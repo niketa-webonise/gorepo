@@ -81,20 +81,17 @@ package main
         x1 := point1[0]
         y1 := point1[1]
 
-        fmt.Println("x1",x1)
-        fmt.Println("y2",y1)
+      
 
         x2 := point2[0]
         y2 := point2[1]
 
-        fmt.Println("x2",x2)
-        fmt.Println("y2",y2)
+      
 
         x3 := point3[0]
         y3 := point3[1]
 
-        fmt.Println("x3",x3)
-        fmt.Println("y3",y3)
+       
 
      
     //convert to float64
