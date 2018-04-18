@@ -65,6 +65,7 @@
         var kml Kml
         xml.Unmarshal(XMLdata, &kml)
 
+<<<<<<< HEAD
         polylineCoordinatesStr := strings.TrimSpace(kml.Document.Placemark.LineString.Coordinates)
         //fmt.Println(polylineCoordinatesStr)
         coordinates := strings.Split(polylineCoordinatesStr, " ")
@@ -78,6 +79,23 @@
 
         x2 := point2[0]
         y2 := point2[1]
+=======
+       
+         polylineCoordinatesStr := strings.TrimSpace(kml.Document.Placemark.LineString.Coordinates)
+      
+        coordinates := strings.Split(polylineCoordinatesStr, " ")
+     
+
+        point1 := strings.Split(coordinates[0],",")
+        point2 := strings.Split(coordinates[1],",")
+
+        x1 := point1[0]
+        y1 := point1[1]
+
+        x2 := point2[0]
+        y2 := point2[1]
+
+>>>>>>> ba734ff602ab84e3888c51ea9b0c031af5facba1
 
         //convert to float64
         lat1, err := strconv.ParseFloat(x1, 64) 

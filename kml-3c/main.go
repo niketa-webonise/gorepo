@@ -82,10 +82,11 @@ package main
         y1 := point1[1]
 
 
+
         x2 := point2[0]
         y2 := point2[1]
 
-       
+
 
         x3 := point3[0]
         y3 := point3[1]
