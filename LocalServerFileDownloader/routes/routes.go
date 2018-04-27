@@ -1,6 +1,6 @@
 package routes
 
-import ("github.com/niketa/gorepo/file/controllers"
+import ("github.com/niketa/gorepo/LocalServerFileDownloader/controllers"
 		"net/http")
 
 func CreateRoute(){
