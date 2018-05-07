@@ -4,37 +4,75 @@ import ("fmt"
 		"os"
         "io/ioutil"
         "encoding/xml"
-        "strings"
+       /* "strings"
         "math"
-        "strconv")
-
-type LineString struct {
-XMLName xml.Name `xml:"LineString"`
-Coordinates string `xml:"coordinates"`
-}
-
-type Placemark struct {
-XMLName xml.Name `xml:"Placemark"`
-name string `xml:"name"`
-description string `xml:"description"`
-styleUrl string `xml:"styleUrl"`
-LineString LineString `xml:"LineString"`
-}
-
-
-type Document struct {
-XMLName xml.Name `xml:"Document"`
-Placemarks []Placemark `xml:"Placemark"`
-}
+        "strconv"*/)
 
 
 type kml struct{
-XMLName xml.Name `xml:"kml"`
-Document Document `xml:"Document"`
+
+    XMLName xml.Name `xml:"kml"`
+    Document Document `xml:"Document"`
 } 
+
+type Document struct {
+    
+    XMLName xml.Name `xml:"Document"`
+    Folder Folder `xml:"Folder"`
+    //Placemarks []Placemark `xml:"Placemark"`
+}
+
+type Folder struct{
+
+    XMLName xml.Name `xml:"Folder"`
+    name string `xml:"name"`
+    description string `xml:"description"`
+    Folder []Placemark `xml:"Placemark"`
+}
+
+type Placemark struct {
+
+    XMLName xml.Name `xml:"Placemark"`
+    Name string `xml:"name"`
+    Description string `xml:"description"`
+    StyleUrl string `xml:"styleUrl"`
+    LineString LineString `xml:"LineString"`
+}
+
+type LineString struct {
+
+    XMLName xml.Name `xml:"LineString"`
+    Coordinates string `xml:"coordinates"`
+}
 
 
 func main() {
+
+
+    if len(os.Args) < 2 {
+        fmt.Println("Missing parameter, provide file name!")
+        return
+    }
+
+    kmlFile, err := ioutil.ReadFile(os.Args[1])
+    if err != nil {
+       fmt.Println("Can't read file:", os.Args[1])
+        panic(err)
+    }
+
+       var  placemarks Folder
+        
+       xml.Unmarshal(kmlFile,&placemarks)
+
+       for i := 0;i<len(placemarks.Folder);i++ {
+    
+        fmt.Println("placemark name:"+ placemarks.Folder[i].Name)
+        fmt.Println("placemark description:"+placemarks.Folder[i].StyleUrl)
+
+       }
+   }
+
+    /*
 
        if len(os.Args) < 2 {
         fmt.Println("Missing parameter, provide file name!")
@@ -51,14 +89,17 @@ func main() {
         
        xml.Unmarshal(kmlFile,&kml)
 
+
      placemark1CoordinatesStr := strings.TrimSpace(kml.Document.Placemarks[1].LineString.Coordinates)
      placemark2CoordinatesStr := strings.TrimSpace(kml.Document.Placemarks[2].LineString.Coordinates)
      placemark3CoordinatesStr := strings.TrimSpace(kml.Document.Placemarks[3].LineString.Coordinates)
+    // placemark4CoordinatesStr := strings.TrimSpace(kml.Document.Placemarks[1].LineString.Coordinates)
 
 
      points1 := strings.Split(placemark1CoordinatesStr," ")
      points2 := strings.Split(placemark2CoordinatesStr," ")
      points3 := strings.Split(placemark3CoordinatesStr," ")
+     //points4 := strings.Split(placemark4CoordinatesStr," ")
      
      var placemark1xcors,placemark1ycors []string
 
@@ -153,14 +194,14 @@ func main() {
             
          }
 
-         fmt.Printf("\nPacemark3TotalDist: %.3f"+"km",placemark3TotalDist/1000)
-                 
+         fmt.Printf("\nplacemark3TotalDist: %.3f"+"km",placemark3TotalDist/1000)
 
-
+      
         totalD := placemark1TotalDist + placemark2TotalDist + placemark3TotalDist
          fmt.Printf("\nTotal distance from A4 to A8: %.3f"+"km",totalD/1000)
 
       }
+
 
 
 func hsin(theta float64) float64 {
@@ -191,4 +232,4 @@ func Distance(lat1, lon1, lat2, lon2 float64) float64 {
         h := hsin(la2-la1) + math.Cos(la1)*math.Cos(la2)*hsin(lo2-lo1)
 
         return 2 * r * math.Asin(math.Sqrt(h))
-}
+}*/

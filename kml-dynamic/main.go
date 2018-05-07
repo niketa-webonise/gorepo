@@ -64,6 +64,7 @@
         
             for i:=0;i<len(points);i++ {
 
+
                 pointCors := strings.Split(points[i],",")
                 xcor := pointCors[0]
                 ycor := pointCors[1]
@@ -91,32 +92,42 @@
 
 }
 
-func hsin(theta float64) float64 {
-        return math.Pow(math.Sin(theta/2), 2)
+
+const (
+    earthRadiusMi = 3958 // radius of the earth in miles.
+    earthRaidusKm = 6371 // radius of the earth in kilometers.
+)
+
+// Coord represents a geographic coordinate.
+type Coord struct {
+    Lat float64
+    Lon float64
 }
 
-// Distance function returns the distance (in meters) between two points of
-//     a given longitude and latitude relatively accurately (using a spherical
-//     approximation of the Earth) through the Haversin Distance Formula for
-//     great arc distance on a sphere with accuracy for small distances
-//
-// point coordinates are supplied in degrees and converted into rad. in the func
-//
-// distance returned is METERS!!!!!!
-// http://en.wikipedia.org/wiki/Haversine_formula
-func Distance(lat1, lon1, lat2, lon2 float64) float64 {
-        // convert to radians
-        // must cast radius as float to multiply later
-        var la1, lo1, la2, lo2, r float64
-        la1 = lat1 * math.Pi / 180
-        lo1 = lon1 * math.Pi / 180
-        la2 = lat2 * math.Pi / 180
-        lo2 = lon2 * math.Pi / 180
+// degreesToRadians converts from degrees to radians.
+func degreesToRadians(d float64) float64 {
+    return d * math.Pi / 180
+}
 
-        r = 6378100 // Earth radius in METERS
+// Distance calculates the shortest path between two coordinates on the surface
+// of the Earth. This function returns two units of measure, the first is the
+// distance in miles, the second is the distance in kilometers.
+func Distance(p, q Coord) (mi, km float64) {
+    lat1 := degreesToRadians(p.Lat)
+    lon1 := degreesToRadians(p.Lon)
+    lat2 := degreesToRadians(q.Lat)
+    lon2 := degreesToRadians(q.Lon)
 
-        // calculate
-        h := hsin(la2-la1) + math.Cos(la1)*math.Cos(la2)*hsin(lo2-lo1)
+    diffLat := lat2 - lat1
+    diffLon := lon2 - lon1
 
-        return 2 * r * math.Asin(math.Sqrt(h))
+    a := math.Pow(math.Sin(diffLat/2), 2) + math.Cos(lat1)*math.Cos(lat2)*
+        math.Pow(math.Sin(diffLon/2), 2)
+
+    c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
+
+    mi = c * earthRadiusMi
+    km = c * earthRaidusKm
+
+    return mi, km
 }

@@ -8,9 +8,7 @@ package main
          "strings"
          "math"
          "strconv"
-
-         
- )
+        )
 
  type LineString struct {
         XMLName xml.Name `xml:"LineString"`

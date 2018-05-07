@@ -5,7 +5,9 @@ import ("net/http"
 		"io"
 		"fmt"
 		"strings"
-		"github.com/dustin/go-humanize")
+		"github.com/dustin/go-humanize"
+        "net/url"
+		)
 
 
 
@@ -32,11 +34,30 @@ func (wc WriteCounter) PrintProgress() {
 
 func FileURL(w http.ResponseWriter,r *http.Request) {
 
-	if r.Method == "GET"{
+	if r.Method == "GET"{	  
 
-    fileUrl := "https://golangcode.com/images/avatar.jpg"
+    fileUrl := "https://d1ohg4ss876yi2.cloudfront.net/golang-resize-image/big.jpg"
 
-    err := DownloadFile("avatar.jpg", fileUrl,w)
+   /* err := DownloadFile("bigger.png", fileUrl,w)
+    if err != nil {
+        panic(err)
+     }*/
+
+     fileURL,err := url.Parse(fileUrl)
+
+       if err != nil {
+                 panic(err)
+         } 
+
+          path := fileURL.Path
+
+         segments := strings.Split(path, "/")
+        // fmt.Println("file segment:",segments)
+
+         filePath := segments[2] // change the number to accommodate changes to the url.Path position
+        // fmt.Println("file name",fileName) 
+
+   err = DownloadFile(filePath,fileUrl,w)
     if err != nil {
         panic(err)
      }
@@ -48,7 +69,6 @@ func FileURL(w http.ResponseWriter,r *http.Request) {
 func DownloadFile(filepath string, url string,w http.ResponseWriter) error {
 
 	
-
     out, err := os.Create(filepath+".tmp")
     if err != nil {
         return err
