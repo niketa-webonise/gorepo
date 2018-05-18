@@ -57,11 +57,11 @@ type Component struct{
 
 type Instance struct {
 
-	EnvMap EnvMap
+	EnvMap EnvMap `bson:"EnvMap"`
 	PortMapping string `bson:"portMapping"`
 	AuthId string `bson:"authId"`
 	HostId string `bson:"hostId"`
-	VolumeMapping VolumeMapping
+	VolumeMapping VolumeMapping `bson:"volumeMapping"`
 	VolumesFrom []string `bson:"volumesFrom"`
 	CommandToBeExecuted string `bson:"commandToBeExecuted"`
 	Links string `bson:"links"`
