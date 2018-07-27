@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns="http://earth.google.com/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+	<Document>
+		<name>VirtualGlobetrotting: Raceways - Velodromes</name>
+		<open>1</open>
+
+            <NetworkLink>
+                <name>VirtualGlobetrotting Live View</name>
+                <flyToView>0</flyToView>
+                <Link>
+                    <href>http://virtualglobetrotting.com/category/land/raceways-velodromes/export-0.kml</href>
+                    <viewFormat>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</viewFormat>
+                    <viewRefreshMode>onStop</viewRefreshMode>
+                </Link>
+            </NetworkLink>	</Document>
+</kml>
